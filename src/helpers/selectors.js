@@ -1,4 +1,4 @@
-/**
+/*
  *
  * @param {object} state - contains days and appointments
  * @param {string} day
@@ -25,13 +25,13 @@ export function getAppointmentsForDay(state, day) {
  * @returns - a new object with existing studen info and add interviewer detail
  */
 
-export function getInterview(state, interview) {
+ export function getInterview(state, interview) {
   if (!interview) {
     return null;
   }
 
-  const interviews = Object.values(state.interviewers);
-  const interview = interviewers.filter(
+  const interviewers = Object.values(state.interviewers);
+  const interviewer = interviewers.filter(
     (obj) => obj.id === interview.interviewer
   );
   const interviewResult = { ...interview, interviewer: interviewer[0] };
