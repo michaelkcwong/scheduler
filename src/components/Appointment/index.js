@@ -15,7 +15,8 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
-const CONFIRM = "Are you sure you would like to delete?"
+const CONFIRM = "Are you sure you would like to delete?";
+const EDIT = "EDIT";
 ;
 const { mode, transition, back } = useVisualMode(
   props.interview ? SHOW : EMPTY
@@ -53,6 +54,7 @@ function deleteInterview(id) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === SAVING && <Status message={SAVING} />}
@@ -62,6 +64,15 @@ function deleteInterview(id) {
         message={CONFIRM}
         onCancel={() => back()}
         onConfirm={() => deleteInterview(props.id)}
+        />
+      )}
+      {mode === EDIT && (
+        <Form
+        student={props.interview.student}
+        interviewer={props.interview.interviewer.id}
+        interviewers={props.interviewers}
+        onCancel={() => back()}
+        onSave={save}
         />
       )}
     </article>
