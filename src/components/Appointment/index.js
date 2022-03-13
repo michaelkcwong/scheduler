@@ -36,7 +36,11 @@ function save(name, interviewer) {
   };
 
   transition(SAVING);
-  props.bookInterview(props.id, interview).then(() => transition(SHOW));
+
+  props
+    .bookInterview(props.id, interview)
+    .then(() => transition(SHOW))
+    .catch(error => transition(ERROR_SAVE, true));
 }
 
 function deleteInterview(id) {
