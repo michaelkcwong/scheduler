@@ -32,12 +32,35 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    return axios.put(`/api/appointments/${id}`, appointment).then(() =>
+    return axios
+    .put(`/api/appointments/${id}`, appointment)
+    .then(() =>
     setState({
       ...state,
       appointments,
     })
   );
+}
+
+function cancelInterview(id) {
+  const appointment = {
+    ...state.appointments[id],
+    interview: null,
+  };
+
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  }
+
+  return axios
+  .delete(`/api/appointments/${id}`, appointment)
+  .then(() => setState({
+     ...state, 
+     appointments
+     })
+  );
+
 }
 
   const appointmentArr = dailyAppointments.map((obj) => {
@@ -52,6 +75,7 @@ export default function Application(props) {
           interview={interview}
           interviewers={interviewers}
           bookInterview={bookInterview}
+          cancelInterview={cancelInterview}
         />
       );
     });
