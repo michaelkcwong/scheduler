@@ -32,7 +32,7 @@ const { mode, transition, back } = useVisualMode(
 function save(name, interviewer) {
   const interview = {
     student: name,
-    interviewer
+    interviewer,
   };
 
   transition(SAVING);
