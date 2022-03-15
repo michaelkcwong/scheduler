@@ -11,11 +11,19 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 
 Main Page
 
+!["Screenshot of main page"]https://github.com/michaelkcwong/scheduler/blob/master/public/screenshots/Main.png
+
 Create New Appointment
+
+!["Screenshot of adding new appointment"]https://github.com/michaelkcwong/scheduler/blob/master/public/screenshots/Addsc.png
 
 Edit Existing Appointment
 
+!["Screenshot of editing existing appointment"]https://github.com/michaelkcwong/scheduler/blob/master/public/screenshots/Editsc.png
+
 Delete Existing Appointment
+!["Screenshot of deleting appointment"]https://github.com/michaelkcwong/scheduler/blob/master/public/screenshots/Delete.png
+
 
 ## Setup
 
