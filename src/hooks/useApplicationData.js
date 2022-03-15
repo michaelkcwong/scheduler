@@ -10,6 +10,12 @@ export default function useApplicationData() {
   });
   const setDay = (day) => setState({ ...state, day });
 
+    /**
+   * Function to update spots when user book new appointmnent or cancel existing one
+   * @param {number} num
+   * @returns state days with the updated spots
+   */
+
   function updateSpots(num) {
     state.days.forEach((day) => {
       if (day.name === state.day) {
@@ -18,6 +24,13 @@ export default function useApplicationData() {
     });
     return state.days;
   }
+
+    /**
+   * Function to book new interview
+   * @param {number} id - interview/appointment ID
+   * @param {object} interview - include student name and interviewer ID
+   * @returns
+   */
 
   function bookInterview(id, interview) {
     const appointment = {
@@ -47,6 +60,12 @@ export default function useApplicationData() {
     });
   }
 
+    /**
+   * Function to cancel/delete exisiting interview
+   * @param {number} id - interview/appointment ID
+   * @returns
+   */
+
 function cancelInterview(id) {
   const appointment = {
     ...state.appointments[id],
@@ -63,6 +82,10 @@ function cancelInterview(id) {
       setState({ ...state, appointments, days });
     });
   }
+
+ /**
+   * Promise to get days, appointments and interviewers info from the API
+   */
 
 useEffect(() => {
   Promise.all([

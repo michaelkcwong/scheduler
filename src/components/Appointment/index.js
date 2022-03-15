@@ -10,7 +10,6 @@ import Status from './Status';
 import Confirm from './Confirm';
 import Error from './Error';
 
-export default function Appointment(props) {
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
@@ -25,9 +24,17 @@ const confirmMsg = "Are you sure you would like to delete?";
 const errSaveMsg = "Something went wrong. Unable to save appointment";
 const errDeleteMsg = "Something went wrong. Unable to delete appointment";
 
+export default function Appointment(props) {
+
 const { mode, transition, back } = useVisualMode(
   props.interview ? SHOW : EMPTY
 );
+
+ /**
+   * Function to save student name and interviewer ID as interview info
+   * @param {string} name - student's name for the appointment
+   * @param {number} interviewer - interviewer ID
+   */
 
 function save(name, interviewer) {
   const interview = {
@@ -43,6 +50,11 @@ function save(name, interviewer) {
     .catch(error => transition(ERROR_SAVE, true));
 }
 
+  /**
+   * Function to delete an existing interview
+   * @param {number} id - interview ID
+   */
+  
 function deleteInterview(id) {
   transition(DELETING, true);
   props
