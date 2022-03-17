@@ -5,7 +5,7 @@ import Button from 'components/Button';
 
 export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
-  const [interviewer, setInterviewer] =useState(props.interviewerm || null);
+  const [interviewer, setInterviewer] =useState(props.interviewer || null);
   const [error, setError] = useState('');
 
   const reset = () => {
@@ -14,8 +14,8 @@ export default function Form(props) {
   };
 
   const validate = () => {
-    if (student === '') {
-      setError('Student name cannot be blank');
+    if (student === '' || interviewer === null) {
+      setError('Student name cannot be blank and an interviewer must be selected!');
       return;
     }
     setError('');
@@ -41,6 +41,7 @@ export default function Form(props) {
         onChange={(event) => setStudent(event.target.value)}
       />
     </form>
+    <section className='appointment__validation'>{error}</section>
     <InterviewerList 
       interviewers={props.interviewers}
       value={interviewer}

@@ -24,7 +24,8 @@ export default function useApplicationData() {
           appointments: all[1].data,
           interviewers: all[2].data,
         }))
-      );
+      )
+      .catch((err) => console.log(err));
     }, []);
   
     const setDay = (day) => setState((prev) => ({ ...prev, day }));

@@ -47,7 +47,7 @@ function save(name, interviewer) {
   props
     .bookInterview(props.id, interview)
     .then(() => transition(SHOW))
-    .catch(error => transition(ERROR_SAVE, true));
+    .catch((err) => transition(ERROR_SAVE, true));
 }
 
   /**
@@ -102,7 +102,7 @@ function deleteInterview(id) {
         />
       )}
        {mode === ERROR_SAVE && <Error message={errSaveMsg} onClose={back} />}
-       {mode === ERROR_DELETE && <Error message={errDeleteMsg} onClose={back} />}
+       {mode === ERROR_DELETE && <Error message={errDeleteMsg} onClose={transition(SHOW)} />}
     </article>
   );
 }
