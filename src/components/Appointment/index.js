@@ -71,7 +71,7 @@ function deleteInterview(id) {
         <Form
         interview={props.interview}
         interviewers={props.interviewers}
-        onCancel={() => transition(EMPTY)}
+        onCancel={back}
         onSave={save}
         />
       )}
@@ -88,7 +88,7 @@ function deleteInterview(id) {
       {mode === CONFIRM && (
         <Confirm
         message={confirmMsg}
-        onCancel={() => back()}
+        onCancel={back}
         onConfirm={() => deleteInterview(props.id)}
         />
       )}
@@ -97,16 +97,12 @@ function deleteInterview(id) {
         student={props.interview.student}
         interviewer={props.interview.interviewer.id}
         interviewers={props.interviewers}
-        onCancel={() => back()}
+        onCancel={back}
         onSave={save}
         />
       )}
-      {mode === ERROR_SAVE && (
-        <Error message={errSaveMsg} onClose ={() => back()} />
-      )}
-      {mode === ERROR_DELETE && (
-        <Error message={errDeleteMsg} onClose={() => back()} />
-      )}
+       {mode === ERROR_SAVE && <Error message={errSaveMsg} onClose={back} />}
+       {mode === ERROR_DELETE && <Error message={errDeleteMsg} onClose={back} />}
     </article>
   );
 }

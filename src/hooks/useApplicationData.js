@@ -72,6 +72,7 @@ export default function useApplicationData() {
     });
   }
 
+
     /**
    * Function to cancel/delete exisiting interview
    * @param {number} id - interview/appointment ID
