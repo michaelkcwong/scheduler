@@ -8,7 +8,26 @@ export default function useApplicationData() {
     appointments: {},
     interviewers: {},
   });
-  const setDay = (day) => setState({ ...state, day });
+ 
+    /**
+   * Promise to get days, appointments and interviewers info from the API
+   */
+     useEffect(() => {
+      Promise.all([
+        axios.get('/api/days'),
+        axios.get('/api/appointments'),
+        axios.get('/api/interviewers'),
+      ]).then((all) =>
+        setState((prev) => ({
+          ...prev,
+          days: all[0].data,
+          appointments: all[1].data,
+          interviewers: all[2].data,
+        }))
+      );
+    }, []);
+  
+    const setDay = (day) => setState((prev) => ({ ...prev, day }));
 
     /**
    * Function to update spots when user book new appointmnent or cancel existing one
@@ -46,16 +65,9 @@ export default function useApplicationData() {
     return axios.put(`/api/appointments/${id}`, appointment).then(() => {
       if (!state.appointments[id].interview) {
         const days = updateSpots(1);
-        setState({
-          ...state,
-          appointments,
-          days,
-        });
+        setState((prev) => ({ ...prev, appointments, days }));
       } else {
-        setState({
-          ...state,
-          appointments,
-        });
+        setState((prev) => ({ ...prev, appointments }));
       }
     });
   }
@@ -79,28 +91,10 @@ function cancelInterview(id) {
 
    return axios.delete(`/api/appointments/${id}`, appointment).then(() => {
       const days = updateSpots(-1);
-      setState({ ...state, appointments, days });
+      setState((prev) => ({ ...prev, appointments, days }));
     });
   }
 
- /**
-   * Promise to get days, appointments and interviewers info from the API
-   */
-
-useEffect(() => {
-  Promise.all([
-    axios.get("/api/days"),
-    axios.get("/api/appointments"),
-    axios.get("/api/interviewers"),
-  ]).then((all) =>
-    setState((prev) => ({
-      ...prev,
-      days: all[0].data,
-      appointments: all[1].data,
-      interviewers: all[2].data,
-    }))
-  );
-}, []);
 
 return { state, setDay, bookInterview, cancelInterview};
 }
